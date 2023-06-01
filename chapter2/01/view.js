@@ -29,8 +29,8 @@ const view = (targetElement, state) => {
   const count = element.querySelector(".todo-count");
   const filters = element.querySelector(".filters");
 
-  list.innerHTML = getTodoElement(todo);
-  count.innerHTML = getTodoCount(todo);
+  list.innerHTML = todos.map((todo) => getTodoElement(todo)).join("");
+  count.textContent = getTodoCount(todos);
 
   Array.from(filters.querySelectorAll("li a")).forEach((a) =>
     a.textContent === currentFilter
