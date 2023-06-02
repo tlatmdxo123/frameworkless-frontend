@@ -26,3 +26,5 @@ setInterval(() => {
   state.todos = getTodos();
   render();
 }, 5000);
+
+render();
