@@ -6,7 +6,7 @@ const createNewTodo = () => {
   return template.content.firstElementChild.cloneNode(true);
 };
 
-const getTodoElement = (todo) => {
+const getTodoElement = (todo, index, events) => {
   const { text, completed } = todo;
 
   const element = createNewTodo();
@@ -18,6 +18,9 @@ const getTodoElement = (todo) => {
     element.classList.add("completed");
     element.querySelector("input.toggle").checked = true;
   }
+
+  const handler = (e) => events.deleteItem(index);
+  element.querySelector("button.destroy").addEventListener("click", handler);
 
   return element;
 };

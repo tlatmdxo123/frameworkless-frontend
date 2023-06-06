@@ -17,10 +17,21 @@ const state = {
   currentFilter: "All",
 };
 
+const events = {
+  deleteItem: (index) => {
+    state.todos = state.todos.filter((todo, i) => i !== index);
+    render();
+  },
+  addItem: (text) => {
+    state.todos = [...state.todos, { text, completed: false }];
+    render();
+  },
+};
+
 const render = () => {
   window.requestAnimationFrame(() => {
     const main = document.querySelector("#root");
-    const newMain = registry.renderRoot(main, state);
+    const newMain = registry.renderRoot(main, state, events);
     applyDiff(document.body, main, newMain);
   });
 };
