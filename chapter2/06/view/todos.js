@@ -19,8 +19,7 @@ const getTodoElement = (todo, index, events) => {
     element.querySelector("input.toggle").checked = true;
   }
 
-  const handler = (e) => events.deleteItem(index);
-  element.querySelector("button.destroy").addEventListener("click", handler);
+  element.querySelector("button.destroy").dataset.index = index;
 
   return element;
 };
@@ -33,6 +32,12 @@ const todos = (targetElement, { todos }) => {
   todos
     .map(getTodoElement)
     .forEach((element) => newTodoList.appendChild(element));
+
+  newTodoList.addEventListener("click", (e) => {
+    if (e.target.matches("button.destroy")) {
+      deleteItem(e.target.dataset.index);
+    }
+  });
 
   return newTodoList;
 };
